@@ -8,9 +8,7 @@ import Trendings from "@/components/trending";
 import { useEffect } from "react";
 
 export default function Home() {
-  const getArticleData = async(() => {
-    co;
-  });
+  
   return (
     <div className="container m-auto">
       <Section />
