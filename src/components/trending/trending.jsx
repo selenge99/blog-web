@@ -1,13 +1,20 @@
+import Label from "../label";
+
 const Trending = ({ badge, image, title }) => {
   return (
     <div className="w-[392px] h-[320px] mt-8 ">
       <div
-        style={{ background: `url(${image})` }}
-        className="w-full h-full rounded-xl"
+        style={{
+          background: `url(${image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        className="w-full h-full rounded-xl flex flex-col justify-end p-4 gap-4"
       >
-        <p className="bg-[#4B6BFB] px-[10px] py-1 rounded-md w-[86px] h-[28px]">
-          {badge}
-        </p>
+        <div>
+          <Label text={badge} />
+        </div>
+
         <h1>{title}</h1>
       </div>
     </div>
