@@ -1,73 +1,87 @@
+import Link from "next/link";
 import BlogPost from "./blog-post";
+import { useEffect, useState } from "react";
 
-const posts = [
-  {
-    image: "/images/post1.png",
-    badge: "Technology",
-    title:
-      "The Impact of Technology on the Workplace: How Technology is Changing",
-    date: "August 20, 2022",
-  },
-  {
-    image: "/images/post2.png",
-    badge: "Design",
-    title:
-      "The Impact of Technology on the Workplace: How Technology is Changing",
-    date: "August 20, 2022",
-  },
-  {
-    image: "/images/post3.png",
-    badge: "Technology",
-    title:
-      "The Impact of Technology on the Workplace: How Technology is Changing",
-    date: "August 20, 2022",
-  },
-  {
-    image: "/images/post4.png",
-    badge: "Technology",
-    title:
-      "The Impact of Technology on the Workplace: How Technology is Changing",
-    date: "August 20, 2022",
-  },
+// const posts = [
+//   {
+//     image: "/images/post1.png",
+//     badge: "Technology",
+//     title:
+//       "The Impact of Technology on the Workplace: How Technology is Changing",
+//     date: "August 20, 2022",
+//   },
+//   {
+//     image: "/images/post2.png",
+//     badge: "Design",
+//     title:
+//       "The Impact of Technology on the Workplace: How Technology is Changing",
+//     date: "August 20, 2022",
+//   },
+//   {
+//     image: "/images/post3.png",
+//     badge: "Technology",
+//     title:
+//       "The Impact of Technology on the Workplace: How Technology is Changing",
+//     date: "August 20, 2022",
+//   },
+//   {
+//     image: "/images/post4.png",
+//     badge: "Technology",
+//     title:
+//       "The Impact of Technology on the Workplace: How Technology is Changing",
+//     date: "August 20, 2022",
+//   },
 
-  {
-    image: "/images/post5.png",
-    badge: "Software",
-    title:
-      "The Impact of Technology on the Workplace: How Technology is Changing",
-    date: "August 20, 2022",
-  },
-  {
-    image: "/images/post6.png",
-    badge: "Technology",
-    title:
-      "The Impact of Technology on the Workplace: How Technology is Changing",
-    date: "August 20, 2022",
-  },
-  {
-    image: "/images/post7.png",
-    badge: "Technology",
-    title:
-      "The Impact of Technology on the Workplace: How Technology is Changing",
-    date: "August 20, 2022",
-  },
-  {
-    image: "/images/post8.png",
-    badge: "Technology",
-    title:
-      "The Impact of Technology on the Workplace: How Technology is Changing",
-    date: "August 20, 2022",
-  },
-  {
-    image: "/images/post9.png",
-    badge: "Technology",
-    title:
-      "The Impact of Technology on the Workplace: How Technology is Changing",
-    date: "August 20, 2022",
-  },
-];
+//   {
+//     image: "/images/post5.png",
+//     badge: "Software",
+//     title:
+//       "The Impact of Technology on the Workplace: How Technology is Changing",
+//     date: "August 20, 2022",
+//   },
+//   {
+//     image: "/images/post6.png",
+//     badge: "Technology",
+//     title:
+//       "The Impact of Technology on the Workplace: How Technology is Changing",
+//     date: "August 20, 2022",
+//   },
+//   {
+//     image: "/images/post7.png",
+//     badge: "Technology",
+//     title:
+//       "The Impact of Technology on the Workplace: How Technology is Changing",
+//     date: "August 20, 2022",
+//   },
+//   {
+//     image: "/images/post8.png",
+//     badge: "Technology",
+//     title:
+//       "The Impact of Technology on the Workplace: How Technology is Changing",
+//     date: "August 20, 2022",
+//   },
+//   {
+//     image: "/images/post9.png",
+//     badge: "Technology",
+//     title:
+//       "The Impact of Technology on the Workplace: How Technology is Changing",
+//     date: "August 20, 2022",
+//   },
+// ];
 
 const BlogPosts = () => {
+  const [articles, setArticles] = useState([]);
+
+  const getArticleData = async () => {
+    const response = await fetch("https://dev.to/api/articles?per_page=9");
+    const data = await response.json();
+    setArticles(data);
+    // console.log("data", data)
+  };
+
+  useEffect(() => {
+    getArticleData();
+  }, []);
   return (
     <div className="w-full">
       <h1 className="text-2xl text-[#181A2A] font-bold mb-8 mt-[100px]">
@@ -85,13 +99,13 @@ const BlogPosts = () => {
         <p className="flex">View all</p>
       </div>
       <div className="flex flex-wrap justify-center gap-5 m-auto mt-8">
-        {posts.map((post) => {
+        {articles.map((post) => {
           return (
             <BlogPost
-              image={post.image}
-              badge={post.badge}
+              image={post.cover_image}
+              badge={post.tags}
               title={post.title}
-              date={post.date}
+              date={post.published_at}
             />
           );
         })}

@@ -11,11 +11,11 @@ const Trending = ({ badge, image, title }) => {
         }}
         className="w-full h-full rounded-xl flex flex-col justify-end p-4 gap-4"
       >
-        <div className="text-[#FFFFFF] text-xs font-medium bg-[#4B6BFB0D]">
+        <div className="text-[#FFFF] text-xs font-medium bg-[#4B6BFB0D]">
           <Label text={badge} />
         </div>
 
-        <h1 className="text-[#FFFFFF] text-lg font-semibold">{title}</h1>
+        <h1 className="text-[#FFFF] text-lg font-semibold">{title}</h1>
       </div>
     </div>
   );

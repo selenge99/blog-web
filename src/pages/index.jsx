@@ -8,7 +8,6 @@ import Trendings from "@/components/trending";
 import { useEffect } from "react";
 
 export default function Home() {
-  
   return (
     <div className="container m-auto">
       <Section />
