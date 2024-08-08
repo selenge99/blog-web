@@ -71,9 +71,11 @@ import { useEffect, useState } from "react";
 
 const BlogPosts = () => {
   const [articles, setArticles] = useState([]);
-
+  const [count, setCount] = useState(0);
   const getArticleData = async () => {
-    const response = await fetch("https://dev.to/api/articles?per_page=9");
+    const response = await fetch(
+      `https://dev.to/api/articles?page=1&per_page=${count + 9}`
+    );
     const data = await response.json();
     setArticles(data);
     // console.log("data", data)
@@ -81,7 +83,7 @@ const BlogPosts = () => {
 
   useEffect(() => {
     getArticleData();
-  }, []);
+  }, [count]);
   return (
     <div className="w-full">
       <h1 className="text-2xl text-[#181A2A] font-bold mb-8 mt-[100px]">
@@ -98,19 +100,26 @@ const BlogPosts = () => {
         </ul>
         <p className="flex">View all</p>
       </div>
+
       <div className="flex flex-wrap justify-center gap-5 m-auto mt-8">
         {articles.map((post) => {
           return (
-            <BlogPost
-              image={post.cover_image}
-              badge={post.tags}
-              title={post.title}
-              date={post.published_at}
-            />
+            <Link href={"/blog/" + post.id}>
+              <BlogPost
+                image={post.cover_image}
+                badge={post.tags}
+                title={post.title}
+                date={post.published_at}
+              />
+            </Link>
           );
         })}
       </div>
-      <button className="border border-[#696A754D] py-3 px-5 rounded-md m-auto mt-[100px] mb-[100px]">
+
+      <button
+        className="border border-[#696A754D] py-3 px-5 rounded-md m-auto mt-[100px] mb-[100px]"
+        onClick={() => setCount(count + 3)}
+      >
         Load More
       </button>
     </div>
