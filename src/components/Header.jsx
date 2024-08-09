@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BlogPosts from "./blog-post";
 
 const Header = () => {
   return (
@@ -19,6 +20,7 @@ const Header = () => {
         type="text"
         placeholder="Search"
         className="border border-solid p-1"
+        onChange={() => {}}
       />
     </header>
   );

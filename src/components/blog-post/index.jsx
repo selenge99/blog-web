@@ -72,6 +72,7 @@ import { useEffect, useState } from "react";
 const BlogPosts = () => {
   const [articles, setArticles] = useState([]);
   const [count, setCount] = useState(0);
+  const [findArticle, setFindArticle] = useState([]);
   const getArticleData = async () => {
     const response = await fetch(
       `https://dev.to/api/articles?page=1&per_page=${count + 9}`

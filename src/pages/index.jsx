@@ -9,7 +9,7 @@ import { useEffect } from "react";
 
 export default function Home() {
   return (
-    <div className="container m-auto">
+    <div className="max-w-[1220px] m-auto">
       <Section />
       <Trendings />
       <BlogPosts />
