@@ -1,6 +1,7 @@
 import Link from "next/link";
 import BlogPost from "./blog-post";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { searchContext } from "@/provider/search-provider";
 
 // const posts = [
 //   {
@@ -70,9 +71,10 @@ import { useEffect, useState } from "react";
 // ];
 
 const BlogPosts = () => {
+  const { searchValue } = useContext(searchContext);
   const [articles, setArticles] = useState([]);
   const [count, setCount] = useState(0);
-  const [findArticle, setFindArticle] = useState([]);
+
   const getArticleData = async () => {
     const response = await fetch(
       `https://dev.to/api/articles?page=1&per_page=${count + 9}`
@@ -81,10 +83,14 @@ const BlogPosts = () => {
     setArticles(data);
     // console.log("data", data)
   };
-
   useEffect(() => {
     getArticleData();
   }, [count]);
+  const finder = articles.filter((data) =>
+    data.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
+  console.log(finder);
+
   return (
     <div className="w-full">
       <h1 className="text-2xl text-[#181A2A] font-bold mb-8 mt-[100px]">
@@ -101,9 +107,9 @@ const BlogPosts = () => {
         </ul>
         <p className="flex">View all</p>
       </div>
-
+      <h2>Hailt hiij bn:{searchValue}</h2>
       <div className="flex flex-wrap justify-center gap-5 m-auto mt-8">
-        {articles.map((post) => {
+        {finder.map((post) => {
           return (
             <Link href={"/blog/" + post.id}>
               <BlogPost
