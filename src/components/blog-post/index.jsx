@@ -1,7 +1,8 @@
 import Link from "next/link";
 import BlogPost from "./blog-post";
 import { useContext, useEffect, useState } from "react";
-import { searchContext } from "@/provider/search-provider";
+import { SearchContext } from "@/provider/search-provider";
+import Loader from "../Loader";
 
 // const posts = [
 //   {
@@ -71,21 +72,9 @@ import { searchContext } from "@/provider/search-provider";
 // ];
 
 const BlogPosts = () => {
-  const { searchValue } = useContext(searchContext);
-  const [articles, setArticles] = useState([]);
-  const [count, setCount] = useState(0);
+  const { searchValue, articles, isLoading, count, setCount } =
+    useContext(SearchContext);
 
-  const getArticleData = async () => {
-    const response = await fetch(
-      `https://dev.to/api/articles?page=1&per_page=${count + 9}`
-    );
-    const data = await response.json();
-    setArticles(data);
-    // console.log("data", data)
-  };
-  useEffect(() => {
-    getArticleData();
-  }, [count]);
   const finder = articles.filter((data) =>
     data.title.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -107,20 +96,24 @@ const BlogPosts = () => {
         </ul>
         <p className="flex">View all</p>
       </div>
-      <h2>Hailt hiij bn:{searchValue}</h2>
+
       <div className="flex flex-wrap justify-center gap-5 m-auto mt-8">
-        {finder.map((post) => {
-          return (
-            <Link href={"/blog/" + post.id}>
-              <BlogPost
-                image={post.cover_image}
-                badge={post.tags}
-                title={post.title}
-                date={post.published_at}
-              />
-            </Link>
-          );
-        })}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          finder.map((post) => {
+            return (
+              <Link href={"/blog/" + post.id}>
+                <BlogPost
+                  image={post.cover_image}
+                  badge={post.tags}
+                  title={post.title}
+                  date={post.published_at}
+                />
+              </Link>
+            );
+          })
+        )}
       </div>
 
       <button

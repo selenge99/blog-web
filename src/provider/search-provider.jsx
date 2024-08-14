@@ -2,32 +2,45 @@ import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 
-export const searchContext = createContext(null);
+export const SearchContext = createContext(null);
 
 const SearchProvider = ({ children }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [articles, setArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [count, setCount] = useState(3);
 
   const getArticleData = async () => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://dev.to/api/articles?page=1&per_page=20`
+        `https://dev.to/api/articles?page=1&per_page=${count}`
       );
       const data = await response.json();
+      setArticles(data);
+      setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
-      toast.success("aldaa garlaa");
+      toast.error("Aldaa garlaa");
     }
   };
   useEffect(() => {
     getArticleData();
-  }, []);
+  }, [count]);
+
   return (
-    <searchContext.Provider value={{ searchValue, setSearchValue }}>
+    <SearchContext.Provider
+      value={{
+        searchValue,
+        setSearchValue,
+        articles,
+        isLoading,
+        count,
+        setCount,
+      }}
+    >
       {children}
-    </searchContext.Provider>
+    </SearchContext.Provider>
   );
 };
 

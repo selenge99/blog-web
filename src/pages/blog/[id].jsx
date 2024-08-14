@@ -18,6 +18,7 @@ const ArticleDetail = () => {
 
   return (
     <div className="p-10 max-w-[1220px] m-auto">
+      <h1>{articleDetail?.title}</h1>
       <div className="flex gap-4">
         <img
           className="w-20 h-20 rounded-full"

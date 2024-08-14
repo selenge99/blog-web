@@ -1,10 +1,10 @@
 import Link from "next/link";
 import BlogPosts from "./blog-post";
 import { useContext } from "react";
-import { searchContext } from "@/provider/search-provider";
+import { SearchContext } from "@/provider/search-provider";
 
 const Header = () => {
-  const { setSearchValue } = useContext(searchContext);
+  const { setSearchValue } = useContext(SearchContext);
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
