@@ -7,7 +7,7 @@ const Section = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const getArticleData = async () => {
-    const res = await fetch("https://dev.to/api/articles?page=2&per_page=4");
+    const res = await fetch("https://dev.to/api/articles?page=2&per_page=9");
     const data = await res.json();
     setArticles(data);
   };

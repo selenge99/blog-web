@@ -4,73 +4,6 @@ import { useContext, useEffect, useState } from "react";
 import { SearchContext } from "@/provider/search-provider";
 import Loader from "../Loader";
 
-// const posts = [
-//   {
-//     image: "/images/post1.png",
-//     badge: "Technology",
-//     title:
-//       "The Impact of Technology on the Workplace: How Technology is Changing",
-//     date: "August 20, 2022",
-//   },
-//   {
-//     image: "/images/post2.png",
-//     badge: "Design",
-//     title:
-//       "The Impact of Technology on the Workplace: How Technology is Changing",
-//     date: "August 20, 2022",
-//   },
-//   {
-//     image: "/images/post3.png",
-//     badge: "Technology",
-//     title:
-//       "The Impact of Technology on the Workplace: How Technology is Changing",
-//     date: "August 20, 2022",
-//   },
-//   {
-//     image: "/images/post4.png",
-//     badge: "Technology",
-//     title:
-//       "The Impact of Technology on the Workplace: How Technology is Changing",
-//     date: "August 20, 2022",
-//   },
-
-//   {
-//     image: "/images/post5.png",
-//     badge: "Software",
-//     title:
-//       "The Impact of Technology on the Workplace: How Technology is Changing",
-//     date: "August 20, 2022",
-//   },
-//   {
-//     image: "/images/post6.png",
-//     badge: "Technology",
-//     title:
-//       "The Impact of Technology on the Workplace: How Technology is Changing",
-//     date: "August 20, 2022",
-//   },
-//   {
-//     image: "/images/post7.png",
-//     badge: "Technology",
-//     title:
-//       "The Impact of Technology on the Workplace: How Technology is Changing",
-//     date: "August 20, 2022",
-//   },
-//   {
-//     image: "/images/post8.png",
-//     badge: "Technology",
-//     title:
-//       "The Impact of Technology on the Workplace: How Technology is Changing",
-//     date: "August 20, 2022",
-//   },
-//   {
-//     image: "/images/post9.png",
-//     badge: "Technology",
-//     title:
-//       "The Impact of Technology on the Workplace: How Technology is Changing",
-//     date: "August 20, 2022",
-//   },
-// ];
-
 const BlogPosts = () => {
   const { searchValue, articles, isLoading, count, setCount } =
     useContext(SearchContext);
@@ -98,22 +31,20 @@ const BlogPosts = () => {
       </div>
 
       <div className="flex flex-wrap justify-center gap-5 m-auto mt-8">
-        {isLoading ? (
-          <Loader />
-        ) : (
-          finder.map((post) => {
-            return (
-              <Link href={"/blog/" + post.id}>
-                <BlogPost
-                  image={post.cover_image}
-                  badge={post.tags}
-                  title={post.title}
-                  date={post.published_at}
-                />
-              </Link>
-            );
-          })
-        )}
+        {finder.map((post) => {
+          console.log("post", post);
+          return (
+            <Link href={"/blog/" + post.id}>
+              <BlogPost
+                image={post.cover_image}
+                badge={post.tag_list}
+                title={post.title}
+                date={post.published_at}
+              />
+            </Link>
+          );
+        })}
+        {isLoading && <Loader />}
       </div>
 
       <button

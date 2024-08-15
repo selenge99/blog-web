@@ -8,7 +8,10 @@ const BlogPost = ({ image, badge, title, date }) => {
         <img src={image} alt="" className="w-full h-full" />
       </div>
       <div className="text-sm font-medium bg-#4B6BFB0D">
-        <Label text={badge} />
+        {/* <Label text={badge} /> */}
+        {badge.map((tag) => (
+          <Label text={tag} />
+        ))}
       </div>
 
       <h1 className="text-[#181A2A] text-2xl font-semibold">{title}</h1>

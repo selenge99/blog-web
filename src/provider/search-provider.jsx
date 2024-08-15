@@ -8,7 +8,7 @@ const SearchProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [articles, setArticles] = useState([]);
-  const [count, setCount] = useState(3);
+  const [count, setCount] = useState(9);
 
   const getArticleData = async () => {
     try {

@@ -1,4 +1,3 @@
-import { trendings } from "./trenddata";
 import { useEffect, useState } from "react";
 
 const { default: Trending } = require("./trending");
